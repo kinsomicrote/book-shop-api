@@ -81,6 +81,6 @@ server.listen(config.port, () => {
     require('./routes')
   })
 
-  global.db = mongoose.connect(config.db.uri)
+  global.db = mongoose.connect(config.db)
 })
 
