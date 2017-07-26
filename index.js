@@ -5,7 +5,8 @@ const config          = require('./config'),
       bunyan          = require('bunyan'),
       winston         = require('winston'),
       bunyanWinston   = require('bunyan-winston-adapter'),
-      mongoose        = require('mongoose')
+      mongoose        = require('mongoose'),
+      corsMiddleware  = require('restify-cors-middleware')
 
 /**
  * Logging
@@ -37,6 +38,16 @@ global.server = restify.createServer({
 /**
  * Middleware
  */
+
+const cors = corsMiddleware({
+  preflightMaxAge: 5,
+  origins: ['http://localhost:8080'],
+  allowHeaders: ['API-Token'],
+  exposeHeaders: ['API-Token-Expiry']
+})
+
+server.pre(cors.preflight)
+server.use(cors.actual)
 
 server.use(restify.plugins.bodyParser({ mapParams: true }))
 server.use(restify.plugins.acceptParser(server.acceptable))
