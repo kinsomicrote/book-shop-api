@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "node server"
+  },
+  "engines": {
+    "node": "8.0.0"
+  },
   "dependencies": {
     "bunyan-winston-adapter": "^0.2.0",
     "lodash": "^4.17.4",
